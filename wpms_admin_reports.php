@@ -9,7 +9,7 @@
  * License: GPL2
  * 
  * @package wpms_admin_tools
- * @since 0.1
+ * @since 1.0
  *
  * Plugin Bootstrap
  * Check requirements and gets instance of plugin
@@ -17,7 +17,7 @@
 
 //Define requirments
 define( 'MCMVC_NAME',                 	'WordPress Multsite Admin Reports' );
-define( 'MCMVC_SHORT_CODE',				'wpmsar' );
+define( 'MCMVC_SHORT_CODE',		'wpmsar' );
 define( 'MCMVC_REQUIRED_PHP_VERSION', 	'5.3.1' ); 
 define( 'MCMVC_REQUIRED_WP_VERSION',  	'3.1' ); 
 
