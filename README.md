@@ -14,9 +14,10 @@ This plugin was orginally inspired by Plugin Stats. I find that as an administra
 
 #### Plugin Stats (Original Version) #####
 
-Kevin Graeme | kgraeme@WP.org
-Deanna Schneider | deannas@WP.org
-Jason Lemahieu | MadtownLems@WP.org
+ - Kevin Graeme | kgraeme@WP.org
+ - Deanna Schneider | deannas@WP.org
+ - Jason Lemahieu | MadtownLems@WP.org
+
 IcoMoon - for making great icons.
 
 Chart.js - for making beautiful charts.
