@@ -3,6 +3,11 @@ WordPress Multisite Admin Reports
 
 This plugin was orginally inspired by Plugin Stats. I find that as an administrator I needed more information out of WordPress than the standard pages provided. So I decided to create more robust reporting tool. This is the first version so if there are any bugs or issues please report them.
 
+### Installation ###
+
+ - Place the wpms_admin_reports.php file and wpms_admin_reports folder in the wp-content/mu-plugins folder.
+ - Login as a network admin and visit the network admin dashboard. 
+
 ### Future Features ###
 
  - [ ]Comments Report
