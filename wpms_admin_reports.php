@@ -1,19 +1,20 @@
 <?php
 /**
- * Plugin Name: WordPress Multisite Admin Reports
- * Plugin URI: http://put in wordpress page
- * Description: This plugin is the combination of various multi-site plugins under a loose MVC framework with some features I wanted added.
- * Version: 0.5
- * Author: Joe Motacek
- * Author URI: http://www.joemotacek.com
- * License: GPL2
- * 
- * @package wpms_admin_tools
- * @since 1.0
- *
- * Plugin Bootstrap
- * Check requirements and gets instance of plugin
- */
+* Plugin Name: WordPress Multisite Admin Reports
+* Plugin URI: http://www.wordpress.org/plugins/wpms_admin_reports
+* Description: TWPMS Admin Reports is a reporting tool for Wordpress Multisite administrators.
+* Version: 1.0
+* Author: Joe Motacek
+* Author URI: http://www.joemotacek.com
+* License: GPL2
+*
+* @package wpms_admin_reports
+* @since 0.1
+*
+* Dispatcher
+* Plugin Bootstrap
+* Check requirements and gets instance of plugin
+*/
 
 //Define requirments
 define( 'MCMVC_NAME',                 	'WordPress Multsite Admin Reports' );
