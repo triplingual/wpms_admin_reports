@@ -39,7 +39,7 @@ jQuery(function($) {
 					//alert(sites_udpated + '/' + site_count + " sites updated");
 					if( sites_updated == site_count ){
 						str_status += "}";
-						alert(str_status);
+						//alert(str_status);
 						jsonStatus = JSON.parse(str_status);
 						jQuery.post(
 							ajax_object.ajax_url, 

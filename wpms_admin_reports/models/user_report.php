@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: WordPress Multisite Admin Reports
- * Plugin URI: http://put in wordpress page
- * Description: This plugin is the combination of various multi-site plugins under a loose MVC framework with some features I wanted added in.
+ * Plugin URI: http://www.wordpress.org/plugins/wpms_admin_reports
+ * Description: TWPMS Admin Reports is a reporting tool for Wordpress Multisite administrators.
  * Version: 0.6
  * Author: Joe Motacek
  * Author URI: http://www.joemotacek.com
@@ -33,6 +33,10 @@ if( !class_exists( 'wpmsar_user_report_model' ) ):
 				" ORDER BY ID ASC");
 				
 			$last_logins = get_site_option('wpmsar_last_logins');
+			
+			if(!$last_logins){
+				$last_logins = array();
+			}
 			
 			foreach( $data as &$user){
 				//Get Last login and last IP address

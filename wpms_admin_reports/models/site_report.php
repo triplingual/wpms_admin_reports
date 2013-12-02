@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: WordPress Multisite Admin Reports
- * Plugin URI: http://put in wordpress page
- * Description: This plugin is the combination of various multi-site plugins under a loose MVC framework with some features I wanted added in.
+ * Plugin URI: http://www.wordpress.org/plugins/wpms_admin_reports
+ * Description: TWPMS Admin Reports is a reporting tool for Wordpress Multisite administrators.
  * Version: 0.5
  * Author: Joe Motacek
  * Author URI: http://www.joemotacek.com
@@ -53,6 +53,10 @@ if( !class_exists( 'wpmsar_site_report_model' ) ):
 			foreach( $this->blogs as $blog){
 				
 				$site_statuses = get_site_option('wpmsar_site_data');
+				
+				if(!$site_statuses){
+					$site_statuses = array();
+				}
 							
 				$blog_details = get_blog_details($blog->blog_id);
 				$blog_details->blog_id = $blog->blog_id;

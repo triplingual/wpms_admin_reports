@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: WordPress Multisite Admin Reports
- * Plugin URI: http://put in wordpress page
- * Description: This plugin is the combination of various multi-site plugins under a loose MVC framework with some features I wanted added in.
+ * Plugin URI: http://www.wordpress.org/plugins/wpms_admin_reports
+ * Description: TWPMS Admin Reports is a reporting tool for Wordpress Multisite administrators.
  * Version: 0.5
  * Author: Joe Motacek
  * Author URI: http://www.joemotacek.com
@@ -51,6 +51,7 @@ if( !class_exists( 'wpmsar_plugin_report_model' ) ):
 			ksort($data['stats_data']);
 			// Derelict Data	
 			$data['derelict_data'] = get_site_option('wpmsar_plugin_derelict_data');
+			if(!$data['derelict_data']){$data['derelict_data'] = array();}
 			
 			// if you're using plugin commander, these two values will be populated
 			$data['auto_activate'] = explode(',',get_site_option('pc_auto_activate_list'));
@@ -97,7 +98,7 @@ if( !class_exists( 'wpmsar_plugin_report_model' ) ):
 				elseif($status ==  "2"){
 					$cache_data['plugins_questionable']++;
 				}else{
-					$cache_data['plugins_diligent']++;	
+					$cache_data['plugins_diligent']++;
 				}
 			}
 			foreach ($data['stats_data'] as $file => $info) {

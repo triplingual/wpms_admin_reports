@@ -1,14 +1,14 @@
 <?php
 /**
  * Plugin Name: WordPress Multisite Admin Reports
- * Plugin URI: http://put in wordpress page
- * Description: This plugin is the combination of various multi-site plugins under a loose MVC framework with some features I wanted added in.
+ * Plugin URI: http://www.wordpress.org/plugins/wpms_admin_reports
+ * Description: TWPMS Admin Reports is a reporting tool for Wordpress Multisite administrators.
  * Version: 0.5
  * Author: Joe Motacek
  * Author URI: http://www.joemotacek.com
  * License: GPL2
  * 
- * @package wpms_admin_tools
+ * @package wpms_admin_reports
  * @since 0.2
  *
  * Plugin Stats View
@@ -25,7 +25,7 @@ if( !class_exists( 'wpmsar_plugin_report_view' ) ):
 			
 			<div class="wrap">
 				<?php screen_icon( 'plugins' ); ?>
-				<h2><?php _e( 'Plugin Stats'); ?></h2>
+				<h2><?php _e( 'Plugin Report'); ?></h2>
 				<div class="tablenav">
                     <div class="pager tablenav-pages">
                         <span class="displaying-num"><?php echo count($data['stats_data']);?> plugins</span>

@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name: WordPress Multisite Admin Tools
- * Plugin URI: http://put in wordpress page
- * Description: This plugin is the combination of various multi-site plugins under a loose MVC framework with some features I wanted added in.
- * Version: 0.5
+ * Plugin Name: WordPress Multisite Admin Reports
+ * Plugin URI: http://www.wordpress.org/plugins/wpms_admin_reports
+ * Description: WPMS Admin Reports is a reporting tool for Wordpress Multisite administrators.
+ * Version: 1.0
  * Author: Joe Motacek
  * Author URI: http://www.joemotacek.com
  * License: GPL2
  * 
- * @package wpms_admin_tools
+ * @package wpms_admin_reports
  * @since 0.2
  *
  * Dashboard View
@@ -48,18 +48,39 @@ if( !class_exists( 'wpmsar_dashboard_view' ) ):
 			<div class="wrap" id="charts">
             	<?php screen_icon('index');?>
                 <h2><?php _e('Dashboard');?></h2>
+                <?php if($data != 0): ?>
                 <div>
                 	<h3>Overall Health</h3>
+                    <?php
+					if(!isset($data['sites_up']) || !isset($data['sites_down']) || !isset($data['sites_count']) ||
+						!isset($data['plugins_never_used']) || !isset($data['plugins_upgradable']) || 
+						!isset($data['plugins_count']) || !isset($data['unassigned_users']) || !isset($data['count_users']) ||
+						!isset($data['sites_no_users']) || !isset($data['sites_count']) ):
+					?>
+                    	<p>Necessary data unavailable.  Please make sure all reports have been visited and updated.</p>
+                    <?php endif; ?>
                     <canvas id="overall-health-chart-block" height="600" width="600"></canvas>
                 </div>
                 <div class="row">
                     <div class="chart-area">
                         <h3>Users - Status</h3>
+                    <?php
+					if( !isset($data['users_login_worst']) || !isset($data['users_login_bad']) || 
+						!isset($data['users_login_good']) || !isset($data['users_login_best']) ):
+					?>
+                    	<p>Necessary data unavailable.  Please visit and update user report.</p>
+                    <?php endif; ?>
                         <canvas id="user-status-chart-block" height="300" width="300"></canvas>
                         <div id="user-status-ledgend"></div>
                     </div>
                     <div class="chart-area">
                         <h3>Sites - Last Updated</h3>
+                    <?php
+					if( !isset($data['last_updated_worst']) || !isset($data['last_updated_bad']) || 
+						!isset($data['last_updated_good']) || !isset($data['last_updated_best']) ):
+					?>
+                    	<p>Necessary data unavailable.  Please visit site report.</p>
+                    <?php endif; ?>
                         <canvas id="last-updated-chart-block" height="300" width="300"></canvas>
                         <div id="last-updated-ledgend"></div>
                     </div>
@@ -67,18 +88,41 @@ if( !class_exists( 'wpmsar_dashboard_view' ) ):
                 <div class="row">
                     <div class="chart-area">
                         <h3>Sites - Last Post</h3>
+                    <?php
+					if( !isset($data['last_post_worst']) || !isset($data['last_post_bad']) || 
+						!isset($data['last_post_good']) || !isset($data['last_post_best']) ):
+					?>
+                    	<p>Necessary data unavailable.  Please visit site report.</p>
+                    <?php endif; ?>
                         <canvas id="last-post-chart-block" height="300" width="300"></canvas>
                         <div id="last-post-ledgend"></div>
                     </div>
                     <div class="chart-area">
                         <h3>Plugins - Status</h3>
+                    <?php
+					if( !isset($data['plugins_derelict']) || !isset($data['plugins_outdated']) || 
+						!isset($data['plugins_questionable']) || !isset($data['plugins_diligent']) || 
+						$data['plugins_derelict'] == 0 && $data['plugins_outdated'] == 0 && 
+						$data['plugins_questionable'] == 0 && $data['plugins_diligent'] == 0 ):
+					?>
+                    	<p>Necessary data unavailable.  Please visit and update plugin report.</p>
+                    <?php endif; ?>
                         <canvas id="plugin-status-chart-block" height="300" width="300"></canvas>
                         <div id="plugin-status-ledgend"></div>
                     </div>
                 </div>
             </div>
-            <?php if($data != 0): ?>
+            
             <script>
+				var chartOptions = {animationEasing : "easeOutQuart"};
+			<?php
+			if(isset($data['sites_up']) && isset($data['sites_down']) && isset($data['sites_count']) &&
+				isset($data['plugins_never_used']) && isset($data['plugins_upgradable']) && 
+				isset($data['plugins_count']) && isset($data['unassigned_users']) && isset($data['count_users']) &&
+				isset($data['sites_no_users']) && isset($data['sites_count']) ):
+			?>
+				
+			
 				var sites_up, sites_down, plugins_used, plugins_unused, plugins_upgradable, plugins_upgraded, 
 					users_unassigned, users_assigned, sites_no_users, sites_with_users;
 					
@@ -117,7 +161,10 @@ if( !class_exists( 'wpmsar_dashboard_view' ) ):
 				};
 				var ohcb = document.getElementById("overall-health-chart-block").getContext("2d");
 				var ohBar = new Chart(ohcb).Radar(overallHealthData, radarOptions);
-				
+			<?php endif; 
+			if(isset($data['users_login_worst']) && isset($data['users_login_bad']) && 
+				isset($data['users_login_good']) && isset($data['users_login_best']) ):
+			?>
 				var userStatusData = [
 					{
 						value: <?php echo $data['users_login_worst']; ?>,
@@ -144,7 +191,10 @@ if( !class_exists( 'wpmsar_dashboard_view' ) ):
 				var chartOptions = {animationEasing : "easeOutQuart"};
 				var usPie = new Chart(uscb).Pie(userStatusData, chartOptions);
 				legend(document.getElementById("user-status-ledgend"), userStatusData);
-				
+			<?php endif; 
+			if(isset($data['last_updated_worst']) && isset($data['last_updated_bad']) && 
+				isset($data['last_updated_good']) && isset($data['last_updated_best']) ):
+			?>
 				var lastUpdatedData = [
 					{
 						value: <?php echo $data['last_updated_worst']; ?>,
@@ -170,7 +220,10 @@ if( !class_exists( 'wpmsar_dashboard_view' ) ):
 				var lucb = document.getElementById("last-updated-chart-block").getContext("2d");
 				var luPie = new Chart(lucb).Pie(lastUpdatedData, chartOptions);
 				legend(document.getElementById("last-updated-ledgend"), lastUpdatedData);
-				
+			<?php endif; 
+			if(isset($data['last_post_worst']) && isset($data['last_post_bad']) && 
+				isset($data['last_post_good']) && isset($data['last_post_best']) ):
+			?>
 				var lastPostData = [
 					{
 						value: <?php echo $data['last_post_worst']; ?>,
@@ -197,7 +250,10 @@ if( !class_exists( 'wpmsar_dashboard_view' ) ):
 				var lpcb = document.getElementById("last-post-chart-block").getContext("2d");
 				var lpPie = new Chart(lpcb).Pie(lastPostData, chartOptions);
 				legend(document.getElementById("last-post-ledgend"), lastPostData);
-				
+			<?php endif; 
+			if(isset($data['plugins_derelict']) && isset($data['plugins_outdated']) && 
+				isset($data['plugins_questionable']) && isset($data['plugins_diligent']) ):
+			?>
 				var pluginStatusData = [
 					{
 						value: <?php echo $data['plugins_derelict']; ?>,
@@ -223,8 +279,13 @@ if( !class_exists( 'wpmsar_dashboard_view' ) ):
 				var pscb = document.getElementById("plugin-status-chart-block").getContext("2d");
 				var psPie = new Chart(pscb).Pie(pluginStatusData, chartOptions);
 				legend(document.getElementById("plugin-status-ledgend"), pluginStatusData);
+			<?php endif; ?>
 			</script>
 		<?php 
+		else:?>
+        	<h3>There is no data to display.</h3>
+        	<p>Please visit each of the reports and updated them in order to populate the dashboard with data.</p>
+		<?php
 		endif;
 		}
 	}
