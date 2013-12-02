@@ -1,18 +1,18 @@
 <?php 
 /**
- * Plugin Name: WordPress Multisite Admin Reports
- * Plugin URI: http://www.wordpress.org/plugins/wpms_admin_reports
- * Description: TWPMS Admin Reports is a reporting tool for Wordpress Multisite administrators.
- * Version: 1.0
- * Author: Joe Motacek
- * Author URI: http://www.joemotacek.com
- * License: GPL2
- * 
- * @package wpms_admin_reports
- * @since 0.1
- *
- * Dispatcher
- */
+* Plugin Name: WordPress Multisite Admin Reports
+* Plugin URI: http://www.wordpress.org/plugins/wpms_admin_reports
+* Description: TWPMS Admin Reports is a reporting tool for Wordpress Multisite administrators.
+* Version: 1.0
+* Author: Joe Motacek
+* Author URI: http://www.joemotacek.com
+* License: GPL2
+*
+* @package wpms_admin_reports
+* @since 0.1
+*
+* Dispatcher
+*/
 
 //For calling scritps, css, and php from the root of the plugin
 define( 'MCMVC_PLUGIN_DIR',	plugin_dir_path( __FILE__ ) );
