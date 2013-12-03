@@ -1,4 +1,3 @@
-<<<<<<< HEAD:trunk/wpms_admin_reports/wpmsar_dispatcher.php
 <?php 
 //For calling scritps, css, and php from the root of the plugin
 define( 'MCMVC_PLUGIN_DIR',	plugin_dir_path( __FILE__ ) );
@@ -131,4 +130,3 @@ if ( !class_exists('wpmsar_dispatcher') ):
 			
 	}
 endif;
->>>>>>> cc70c92b9c180ec03f5911e8410ba30163eddd86:wpms_admin_reports/wpmsar_dispatcher.php
