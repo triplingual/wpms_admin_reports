@@ -23,6 +23,7 @@ The plugin has a detailed help tabs that throughly explain the details of each r
  - [ ]Comments Report
  - [ ]Archive and Delete Actions
  - [ ]Options/Configuration/Settings Page
+ - [ ]Archive and Deleted Highlighting
 
 
 ### Credits, Thanks & Inspiration ###
