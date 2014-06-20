@@ -160,21 +160,23 @@ if( !class_exists( 'wpmsar_site_report_model' ) ):
 			global $wpdb;
 			
 			$blogs = $wpdb->get_results("
-				SELECT blog_id
+				SELECT blog_id, archived
 				FROM " . $wpdb->base_prefix . "blogs
 				ORDER BY blog_id ASC
 			");
 			
 			$site_name = htmlentities(stripslashes($json['site_name']), ENT_QUOTES);
+			$archived = false;
 			foreach($blogs as $blog){
 				switch_to_blog($blog->blog_id);
 				if(get_option('blogname') == $site_name){
 					$home_url = get_option('home');
+					$archived = $blog->archived;
 				}
 				restore_current_blog();
 			}
 			
-			if(isset($home_url) ){
+			if(isset($home_url) && !$archived){
 				$site_home_page = @file_get_contents($home_url, NULL, NULL, 0 , 10);
 				if($site_home_page !== false){
 					$status = "Up";
@@ -182,8 +184,11 @@ if( !class_exists( 'wpmsar_site_report_model' ) ):
 					$status = "Down";
 				}
 								
-				$message = 'Site: ' . $site_name . ' updated...';
+				$message = 'Site: ' . $site_name . ' is alive and well...';
 				$result = array('message' => $message, 'site_name' => $site_name, 'status' => $status);
+			}elseif($archived){
+				$message = 'Site: ' . $site_name . ' is archived...';
+				$result = array('message' => $message, 'site_name' => $site_name, 'status' => "Archived");
 			}else{
 				$message = 'Site: ' . $site_name . ' not found...';
 				$result = array('message' => $message, 'site_name' => $site_name, 'status' => "???");

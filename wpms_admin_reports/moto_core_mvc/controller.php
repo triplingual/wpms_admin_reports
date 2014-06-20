@@ -3,7 +3,7 @@
  * Framework Name: Moto Core MVC
  * Plugin URI: http://addlater
  * Description: This frameworks contains the core functions needed for basic MVC operations within the WP codebase.  This is not strict MVC, just what makes sense within the WordPress framework. 
- * Version: 0.5
+ * Version: 0.6
  * Author: Joe Motacek
  * Author URI: http://www.joemotacek.com
  * License: GPL2
@@ -42,7 +42,7 @@ if ( ! class_exists( 'mcmvc_controller' ) ):
 			return self::$models[$model];				
 		}
 		
-		public static function __get_view($name = null) {
+		public static function __get_view($name = NULL) {
 			if(!$name){
 				$controller_name = get_called_class();
 				preg_match('/(?<=_).*(?=_)/', $controller_name, $matches);

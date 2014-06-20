@@ -11,6 +11,9 @@ if( !class_exists( 'wpmsar_user_report_controller' ) ):
 		private $model;
 		
 		public function __construct() {
+			if( !current_user_can('manage_network')){
+				wp_die( 'Network Admins Only' );
+			}
 			$this->model = self::__get_model();
 		}
 		

@@ -29,10 +29,31 @@ if( !class_exists( 'wpmsar_dashboard_view' ) ):
 			.row{
 				height:500px;
 			}
+			#mass-mail{
+				width: 100px;
+				height: 100px;
+				display:block;
+				padding-top: 15px;
+				background-color: #FFF;
+				border: 1px solid #DDD;
+				border-radius:  5px;
+				font-size: 16px;
+				text-align:center;
+				text-decoration: none;
+			}
+			#mass-mail:before{
+				font-size: 40px;
+				width: 40px;
+				height: 40px;	
+			}
 			</style>
 			<div class="wrap" id="charts">
             	<?php screen_icon('index');?>
                 <h2><?php _e('Dashboard');?></h2>
+                <div>
+                	<h3>Actions</h3>
+                    <a href="admin.php?page=wpmsar_mass_mail" id="mass-mail" class="wp-menu-image dashicons-before dashicons-admin-users"><br/><?php _e( 'Email Admins' ); ?></a>
+                </div>
                 <?php if($data != 0): ?>
                 <div>
                 	<h3>Overall Health</h3>
@@ -123,7 +144,7 @@ if( !class_exists( 'wpmsar_dashboard_view' ) ):
 					sites_with_users = 100 - sites_no_users;
 					
 				var overallHealthData = {
-					labels : ["Site Up/Down", "Plugin Usage", "Upgradeable PLugins",
+					labels : ["Site Up/Down", "Plugin Usage", "Upgradeable Plugins",
 					 "Unassigned Users", "Sites with Users"],
 					datasets : [
 						{

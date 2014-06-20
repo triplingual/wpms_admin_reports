@@ -8,7 +8,10 @@ if( !class_exists( 'wpmsar_site_report_controller' ) ):
 
 	class wpmsar_site_report_controller extends mcmvc_controller{
 				
-		public function __construct() {			
+		public function __construct() {
+			if( !current_user_can('manage_network')){
+				wp_die( 'Network Admins Only' );
+			}		
 			wp_localize_script( 
 				'site_reportJS', 
 				'ajax_object', 
@@ -18,14 +21,38 @@ if( !class_exists( 'wpmsar_site_report_controller' ) ):
 					'site_list' 	=> json_encode(self::__get_model()->site_list)
 				)
 			);
-			
-			//$this->update_site_status();
 		}
 		
 		public function load_view() {
+			
+			if(isset($_GET['action']) && isset($_GET['id']) ){
+				$action = $_GET['action'];
+				$id = $_GET['id'];
+				if ($action == "archive"){
+					check_admin_referer('wpmsar_archive');
+					if( !is_archived($id)){
+						update_blog_status( $id, 'archived', '1' );
+						$msg = "Blog Archived - Please%20update%20data%20to%20see%20changed%20status.";
+					}else{
+						$msg = "Blog%20is%20already%20archived...";
+					}
+				}
+				if ($action == "unarchive"){
+					check_admin_referer('wpmsar_unarchive');
+					if( is_archived($id)){
+						update_blog_status( $id, 'archived', '0' );
+						$msg = "Blog%20Unarchived%20-%20Please%20update%20data%20to%20see%20changed%20status.";
+					}else{
+						$msg = "Blog%20is%20already%20unarchived...";
+					}
+				}
+				wp_redirect(network_admin_url("admin.php?page=wpmsar_site_report&msg=".$msg));
+				exit;
+			}
+			
 			$data = self::__get_model()->get_data();
 			$view = self::__get_view();
-			$view->display($data);
+			$view->display($data, $action_status);
 		}
 		
 		public function site_check(){

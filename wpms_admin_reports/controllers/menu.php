@@ -44,6 +44,15 @@ if( !class_exists( 'wpmsar_menu_controller' ) ):
 				array(__CLASS__, 'plugin_report') 
 			);
 			
+			$mass_mail = add_submenu_page(
+				NULL, 
+				__('Email Admins'), 
+				__('Email Admins'), 
+				'manage_network', 
+				'wpmsar_mass_mail', 
+				array(__CLASS__, 'mass_mail') 
+			);
+			
 			add_action("load-" . $menu, array( __CLASS__, 'help_tabs'));
 			add_action("load-" . $plugin_report, array( __CLASS__, 'help_tabs'));
 			add_action("load-" . $site_report, array( __CLASS__, 'help_tabs'));
@@ -56,6 +65,10 @@ if( !class_exists( 'wpmsar_menu_controller' ) ):
 			self::__get_controller('dashboard')->load_view();;
 		}
 		
+		public function mass_mail() {
+			self::__get_controller('dashboard')->load_mass_mail();
+		}
+		
 		public function plugin_report() {
 			self::__get_controller('plugin_report')->load_view();
 		}
@@ -66,7 +79,7 @@ if( !class_exists( 'wpmsar_menu_controller' ) ):
 		
 		public function user_report() {
 			self::__get_controller('user_report')->load_view();
-		}
+		}		
 		
 		public function help_tabs() {
 			self::__get_controller('help_tabs');		     

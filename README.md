@@ -21,9 +21,9 @@ The plugin has a detailed help tabs that throughly explain the details of each r
 ### Future Features ###
 
  - [ ]Comments Report
- - [ ]Archive and Delete Actions
+ - [ ]Delete action (consider)?
  - [ ]Options/Configuration/Settings Page
- - [ ]Archive and Deleted Highlighting
+ - [ ]Consider integrating into the existing wordpress completely...
 
 
 ### Credits, Thanks & Inspiration ###
@@ -45,9 +45,14 @@ jQuery - for being awsome.
 Wordpress Last Login
 
 ### WordPress Requirments: ###
-Requires at least: ???
-Tested up to: 3.7.1
+Requires at least: 3.1
+Tested up to: 3.9.1
+
+### Changelog ###
+v 1.1.0 - Added "Email Admins" feature.
+v 1.1.1 - Fixed broken Dashboard links.
+v 1.1.2 - Added archive to site report status options.
+v 1.1.3 - Added archive and unarchive functionality. (Not sure I want to put in delte function anymore...)
 
 License - GPL2
-
-Copyright © 2013 Joe Motacek
+Copyright © 2013-2014 Joe Motacek

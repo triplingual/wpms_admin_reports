@@ -8,7 +8,10 @@ if( !class_exists( 'wpmsar_plugin_report_controller' ) ):
 
 	class wpmsar_plugin_report_controller extends mcmvc_controller{
 		
-		public function __construct() {			
+		public function __construct() {	
+			if( !current_user_can('manage_network')){
+				wp_die( 'Network Admins Only' );
+			}		
 			wp_localize_script( 
 				'plugin_reportJS', 
 				'ajax_object', 

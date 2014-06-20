@@ -12,6 +12,9 @@ if( !class_exists( 'wpmsar_site_report_view' ) ):
 			<div class="wrap">
             	<?php screen_icon('ms-admin');?>
                 <h2><?php _e('Site Report');?></h2>
+                <?php if (isset($_GET['msg'])): ?>
+                <div id='message' class='updated fade'><p><strong><?php echo $_GET['msg'];?></strong></p></div>
+                <?php endif; ?>
                 <div class="tablenav">
                     <div class="pager tablenav-pages">
                         <span class="displaying-num"><?php echo count($data);?> sites</span>
@@ -57,22 +60,32 @@ if( !class_exists( 'wpmsar_site_report_view' ) ):
                                         <a href="<?php echo network_admin_url(); ?>site-info.php?id=<?php echo $site->blog_id?>">Edit</a>
                                     </span> | </span>
                                     <span class="backend"><span class="backend">
-                                        <a href="<?php echo get_admin_url() . $site->path; ?>wp-admin/" class="edit">Dashboard</a>
-                                    </span>  </span>
-                                    <!-- Add this functionality it next version @todo
+                                        <a href="<?php echo $site->home_url ?>/wp-admin/" class="edit">Dashboard</a>
+                                    </span> | </span>
+                                    <?php if ($site->site_status !== "Archived"):?>
+									<span class="archive"><span class="archive">
+                                    	<a href="<?php
+										$url = network_admin_url() . 
+											'admin.php?page=wpmsar_site_report&amp;noheader=true&amp;action=archive&amp;id=' . 
+											$site->blog_id;
+										echo wp_nonce_url($url, 'wpmsar_archive')?>" onclick="if (!confirm('Are you sure?')) return false;">Archive</a>
+                                    </span></span>
+                                    <?php else: ?>
                                     <span class="archive"><span class="archive">
                                     	<a href="<?php
 										$url = network_admin_url() . 
-											'admin.php?page=wpmsar_site_report&amp;action=archive&amp;id=' . 
+											'admin.php?page=wpmsar_site_report&amp;noheader=true&amp;action=unarchive&amp;id=' . 
 											$site->blog_id;
-										echo wp_nonce_url($url, 'archive')?>">Archive</a>
-                                    </span> | </span>
+										echo wp_nonce_url($url, 'wpmsar_unarchive')?>" onclick="if (!confirm('Bring it back?')) return false;" >Unarchive</a>
+                                    </span></span>
+                                    <?Php endif; ?>
+                                    <!-- | </span>
                                     <span class="delete"><span class="delete">
-                                    <a href="<?php
+                                    <a class="delete" href="<?php
 										$url = network_admin_url() . 
 											'admin.php?page=wpmsar_site_report&amp;action=delete&amp;id=' . 
 											$site->blog_id;
-										echo wp_nonce_url($url, 'delete');?>">Delete</a>
+										echo wp_nonce_url($url, 'wpmsar_delete');?>">Delete</a>
                                     </span></span>-->
                                 </div>
                                 </td>
