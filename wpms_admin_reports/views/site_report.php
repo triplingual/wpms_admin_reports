@@ -43,7 +43,7 @@ if( !class_exists( 'wpmsar_site_report_view' ) ):
                             <th class="date_column"><?php _e('Last Post');?></th>
                             <th class="date_column"><?php _e('Updated');?></th>
                             <th class="date_column"><?php _e('Created');?></th>
-                            <th><?php _e('Tempalte');?></th>
+                            <th><?php _e('Template');?></th>
                             <th class="user_column"><?php _e('Users');?></th>
                             <th><?php _e('Admin');?></th>
                         </tr>

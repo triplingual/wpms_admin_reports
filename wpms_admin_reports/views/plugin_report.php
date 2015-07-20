@@ -61,7 +61,7 @@ if( !class_exists( 'wpmsar_plugin_report_view' ) ):
 								<th class="pc_settings_right"><?php _e( 'Supporter Controlled' ); ?></th>
 								<?php	
 								}?>
-								<th><?php _e( 'Ugradeable'); ?></th>
+								<th><?php _e( 'Upgradeable'); ?></th>
 								<th><?php _e( 'Status'); ?></th>
 								<th><?php _e( 'Activated Sitewide'); ?></th>
 								<th><?php _e( 'Total Blogs'); ?></th>
